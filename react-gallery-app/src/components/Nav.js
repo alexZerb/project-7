@@ -2,14 +2,14 @@ import React from "react";
 
 const Nav = () => {
     return(
-        <nav className='main-nav'>
+        <div className='main-nav'>
                 <ul>
                     <li>
                         
                     </li>
                 </ul>
-            </nav>
-    ) 
+            </div>
+    ); 
 
 }
 

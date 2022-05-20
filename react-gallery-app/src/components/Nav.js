@@ -1,11 +1,32 @@
 import React from "react";
-
+import {
+    withRouter,
+    NavLink,
+} from 'react-router-dom';
 const Nav = () => {
     return(
         <div className='main-nav'>
                 <ul>
                     <li>
-                        
+                      <NavLink 
+                        to='/lions' 
+                        onClick={this.props.navItem} 
+                        id='lions'>Lions
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink 
+                        to='/tigers' 
+                        onClick={this.props.navItem} 
+                        id='lions'>
+                      </NavLink>Tigers
+                    </li>
+                    <li>
+                      <NavLink 
+                        to='/bears' 
+                        onClick={this.props.navItem} 
+                        id='bears'>Bears
+                      </NavLink>
                     </li>
                 </ul>
             </div>
@@ -13,4 +34,4 @@ const Nav = () => {
 
 }
 
-export default Nav;
+export default withRouter(Nav);

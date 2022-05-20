@@ -10,7 +10,7 @@ const PhotoContainer = props => {
             <h2>{props.query}</h2>
                 <ul>
                 {searchData.map(photo => (
-                    <Photo id={photo.id} server={photo.server} secret={photo.secret} key={photo.id} />
+                    <Photo id={photo.id} server={photo.server} secret={photo.secret} key={props.photo.id} />
                 ))} 
                 </ul>
         </div>

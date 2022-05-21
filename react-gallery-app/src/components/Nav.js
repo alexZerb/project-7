@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    withRouter,
     NavLink,
 } from 'react-router-dom';
 const Nav = () => {
@@ -10,7 +9,7 @@ const Nav = () => {
                     <li>
                       <NavLink 
                         to='/lions' 
-                        onClick={this.props.navItem} 
+                        onClick={this.state.props.navItem} 
                         id='lions'>Lions
                       </NavLink>
                     </li>
@@ -34,4 +33,4 @@ const Nav = () => {
 
 }
 
-export default withRouter(Nav);
+export default NavLink(Nav);

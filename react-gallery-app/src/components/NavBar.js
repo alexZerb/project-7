@@ -1,31 +1,31 @@
 import React from "react";
 import {
-    NavLink,
+    Link,
 } from 'react-router-dom';
-const Nav = () => {
+const NavBar = () => {
     return(
         <div className='main-nav'>
                 <ul>
                     <li>
-                      <NavLink 
+                      <Link 
                         to='/lions' 
-                        onClick={this.state.props.navItem} 
+                        onClick={this.navItem} 
                         id='lions'>Lions
-                      </NavLink>
+                      </Link>
                     </li>
                     <li>
-                      <NavLink 
+                      <Link 
                         to='/tigers' 
-                        onClick={this.props.navItem} 
+                        onClick={this.navItem} 
                         id='lions'>
-                      </NavLink>Tigers
+                      </Link>Tigers
                     </li>
                     <li>
-                      <NavLink 
+                      <Link 
                         to='/bears' 
-                        onClick={this.props.navItem} 
+                        onClick={this.navItem} 
                         id='bears'>Bears
-                      </NavLink>
+                      </Link>
                     </li>
                 </ul>
             </div>
@@ -33,4 +33,4 @@ const Nav = () => {
 
 }
 
-export default NavLink(Nav);
+export default NavBar;

@@ -1,61 +1,57 @@
-import React  from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
-import apiKey from './config'
+import apiKey from './config.js';
+import SearchForm from './components/SearchForm';
+import PhotoContainer from './components/PhotoContainer'
+import NavBar from './components/NavBar';
 
-export default function App() {
+// CONVERT TO FUNCTION IF POSSIBLE
+
+class App extends Component {
   
-  const newSearch = ( query = 'lions') => {
-    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&format=json&nojsoncallback=1`)
-    .then( res => {
-      const data = res.data;
-      console.log(data);
-    })
+  constructor(props) {
+    super(props);
+//sets pics state to an empty array and query to an empty string
+    this.state = {
+      photos: [],
+      query: ''
+    }
   }
-  newSearch();
-  return(
-    <div className='main-container'>
-      <form className='search-form'>
-        <input type='search' name='search' placeholder='Search' required></input>
-        <button type="submit" class="search-button">
-          <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-            <path d="M0 0h24v24H0z" fill="none"/>
-          </svg>
-        </button>
-      </form>
-      <nav className='main-nav'>
-        <ul>
-          <li>Cats</li>
-          <li>Dogs</li>
-          <li>Computers</li>          
-        </ul>
-      </nav>
+// when page loads a new search is called (query is set to lions)
+  componentDidMount(){
+    this.newSearch();
+  }
 
-      <div className='photo-container'>
-        <h2>I'm really trying to make this work</h2>
-        <ul>
-          <li>
-            <img src="https://farm5.staticflickr.com/4334/37032996241_4c16a9b530.jpg" alt="" />
-          </li>
-          <li>
-            <img src="https://farm5.staticflickr.com/4342/36338751244_316b6ee54b.jpg" alt="" />
-          </li>
-          <li>
-            <img src="https://farm5.staticflickr.com/4343/37175099045_0d3a249629.jpg" alt="" />
-          </li>
-          <li>
-            <img src="https://farm5.staticflickr.com/4425/36337012384_ba3365621e.jpg" alt="" />
-          </li>
-          {/* {switch to not found if problem getting links}  */}
-          <li class="not-found">
-            <h3>No Results Found</h3>
-            <p>You search did not return any results. Please try again.</p>
-          </li>
-        </ul>
+  newSearch = ( query = 'lions') => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+    .then( response => {
+      this.setState({
+        photos: response.data.photos.photo,
+        query: query,
+    })
+    .catch(error => {
+      console.log('Error fetching and parsing data', error);
+    });
+  })
+  }
+//  navBar should update photos to match selection
+  handleClick = e => {
+    const query = e.target.id;
+    this.newSearch(query);
+  }
+
+  render() {
+    console.log(this.state.data);
+    return (
+      <div className='container'>
+        <SearchForm />
+        <NavBar navItem={this.handleClick} />
+        <PhotoContainer />
       </div>
-    </div>
-  )
+    );
+  }
+  
 }
 
-
+export default App;
